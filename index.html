@@ -1,0 +1,913 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tahany Emad | Mind-Blowing CS Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;900&family=Space+Mono:wght@700&display=swap"
+        rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/ScrollTrigger.min.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        poppins: ['Poppins', 'sans-serif'],
+                        space: ['Space Mono', 'monospace'],
+                    },
+                    colors: {
+                        electric: {
+                            blue: '#00F5FF',
+                            purple: '#9747FF',
+                            pink: '#FF00E5',
+                            dark: '#0A0A1A',
+                            light: '#E0E0FF',
+                        },
+                    },
+                    backgroundImage: {
+                        'circuit': "url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2IiBoZWlnaHQ9IjYiPgo8cmVjdCB3aWR0aD0iNiIgaGVpZ2h0PSI2IiBmaWxsPSIjMEEwQTFBIj48L3JlY3Q+CjxwYXRoIGQ9Ik0wIDBMNiA2TTYgMEwwIDZaIiBzdHJva2U9IiMwMEY1RkYiIHN0cm9rZS13aWR0aD0iMC4yIiBzdHJva2Utb3BhY2l0eT0iMC4yIi8+Cjwvc3ZnPg==')",
+                        'gradient-radial': 'radial-gradient(circle at center, var(--tw-gradient-stops))',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #0A0A1A;
+            color: #E0E0FF;
+            overflow-x: hidden;
+        }
+
+        .hero-text {
+            background: linear-gradient(90deg, #00F5FF, #9747FF, #FF00E5);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            background-size: 300% 300%;
+            animation: gradient 8s ease infinite;
+        }
+
+        @keyframes gradient {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        .card {
+            background: rgba(10, 10, 26, 0.6);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(0, 245, 255, 0.2);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .card:hover {
+            transform: translateY(-10px) scale(1.02);
+            border-color: rgba(151, 71, 255, 0.6);
+            box-shadow: 0 20px 40px rgba(0, 245, 255, 0.15);
+        }
+
+        .skill-pill {
+            background: rgba(0, 245, 255, 0.1);
+            border: 1px solid rgba(0, 245, 255, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .skill-pill:hover {
+            background: rgba(151, 71, 255, 0.2);
+            border-color: rgba(255, 0, 229, 0.5);
+            transform: scale(1.1);
+        }
+
+        .floating {
+            animation: floating 6s ease-in-out infinite;
+        }
+
+        @keyframes floating {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        .pulse {
+            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.5;
+            }
+        }
+
+        .glow {
+            filter: drop-shadow(0 0 8px currentColor);
+        }
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(0, 245, 255, 0.1), rgba(151, 71, 255, 0.1), rgba(255, 0, 229, 0.1));
+            z-index: -1;
+            border-radius: inherit;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .project-card:hover::before {
+            opacity: 1;
+        }
+
+        .nav-link {
+            position: relative;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 0;
+            background: linear-gradient(90deg, #00F5FF, #9747FF);
+            transition: width 0.4s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        section {
+            opacity: 1 !important;
+            transform: none !important;
+        }
+
+        /* Mobile menu styles */
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 80%;
+            max-width: 300px;
+            height: 100vh;
+            background: rgba(10, 10, 26, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 2rem;
+            transform: translateX(100%);
+            transition: transform 0.3s ease-out;
+        }
+
+        .mobile-menu.open {
+            transform: translateX(0);
+        }
+
+        .mobile-menu a {
+            display: block;
+            padding: 1rem 0;
+            font-size: 1.2rem;
+            color: #E0E0FF;
+            border-bottom: 1px solid rgba(0, 245, 255, 0.2);
+        }
+
+        .menu-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 999;
+        }
+
+        .menu-overlay.open {
+            display: block;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .hero-text {
+                font-size: 3rem;
+                line-height: 1.2;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .hero-buttons a {
+                width: 100%;
+                text-align: center;
+            }
+
+            .floating-circle {
+                width: 250px !important;
+                height: 250px !important;
+                margin-top: 2rem;
+            }
+
+            .project-card,
+            .experience-card {
+                padding: 1.5rem !important;
+            }
+
+            .education-section .flex {
+                flex-direction: column;
+            }
+
+            .education-icon {
+                margin-bottom: 1.5rem;
+            }
+
+            .contact-buttons {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .contact-buttons a {
+                width: 100%;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+
+<body class="font-poppins bg-circuit">
+    <!-- Animated Background Elements -->
+    <div class="fixed inset-0 overflow-hidden -z-10">
+        <div
+            class="absolute inset-0 bg-gradient-radial from-electric-blue/10 via-electric-dark to-electric-dark opacity-80">
+        </div>
+        <div id="particles-js" class="absolute inset-0 opacity-20"></div>
+    </div>
+
+    <!-- Mobile Menu Overlay -->
+    <div id="menuOverlay" class="menu-overlay"></div>
+
+    <!-- Mobile Menu -->
+    <div id="mobileMenu" class="mobile-menu">
+        <div class="flex justify-between items-center mb-8">
+            <div class="text-3xl font-bold font-space">
+                <span class="text-electric-blue">{</span>
+                <span class="text-electric-pink">TE</span>
+                <span class="text-electric-blue">}</span>
+            </div>
+            <button id="closeMenu" class="text-electric-light">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+        </div>
+        <nav class="flex flex-col space-y-4">
+            <a href="#about" class="nav-link">ABOUT</a>
+            <a href="#projects" class="nav-link">PROJECTS</a>
+            <a href="#experience" class="nav-link">EXPERIENCE</a>
+            <a href="#contact" class="nav-link">CONTACT</a>
+        </nav>
+    </div>
+
+    <!-- Header -->
+    <header class="container mx-auto px-4 sm:px-6 py-8 sm:py-12">
+        <nav class="flex justify-between items-center mb-8 sm:mb-16">
+            <div class="text-2xl sm:text-3xl font-bold font-space">
+                <span class="text-electric-blue">{</span>
+                <span class="text-electric-pink">TE</span>
+                <span class="text-electric-blue">}</span>
+            </div>
+            <div class="hidden md:flex space-x-6 sm:space-x-10">
+                <a href="#about" class="nav-link text-electric-light hover:text-white text-base sm:text-lg">ABOUT</a>
+                <a href="#projects"
+                    class="nav-link text-electric-light hover:text-white text-base sm:text-lg">PROJECTS</a>
+                <a href="#experience"
+                    class="nav-link text-electric-light hover:text-white text-base sm:text-lg">EXPERIENCE</a>
+                <a href="#contact"
+                    class="nav-link text-electric-light hover:text-white text-base sm:text-lg">CONTACT</a>
+            </div>
+            <button id="openMenu" class="md:hidden text-electric-light">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+            </button>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="about" class="container mx-auto px-4 sm:px-6 py-12 sm:py-20">
+        <div class="flex flex-col md:flex-row items-center justify-between gap-8 sm:gap-16">
+            <div class="md:w-1/2">
+                <h1 class="hero-text text-4xl sm:text-5xl md:text-7xl font-bold mb-6 sm:mb-8 leading-tight">
+                    CODE THAT <br>ELECTRIFIES
+                </h1>
+                <p class="text-lg sm:text-xl text-electric-light mb-6 sm:mb-10 opacity-90">
+                    Computer Science Student @ Zagazig University<br>
+                    GPA: 3.82 | Expected Graduation: May 2027
+                </p>
+                <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-6 hero-buttons">
+                    <a href="#projects" class="relative overflow-hidden group">
+                        <div
+                            class="absolute inset-0 bg-gradient-to-r from-electric-blue to-electric-purple opacity-80 group-hover:opacity-100 transition-all duration-500 rounded-xl">
+                        </div>
+                        <div
+                            class="relative bg-electric-dark px-6 sm:px-8 py-3 sm:py-4 rounded-xl font-bold group-hover:bg-opacity-0 transition-all duration-500 text-sm sm:text-base">
+                            EXPLORE PROJECTS
+                        </div>
+                    </a>
+                    <a href="#contact" class="relative overflow-hidden group">
+                        <div
+                            class="absolute inset-0 border-2 border-electric-pink rounded-xl group-hover:bg-electric-pink/10 transition-all duration-500">
+                        </div>
+                        <div
+                            class="relative px-6 sm:px-8 py-3 sm:py-4 rounded-xl font-bold text-electric-pink group-hover:text-white transition-all duration-500 text-sm sm:text-base">
+                            CONNECT WITH ME
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="md:w-1/2 flex justify-center relative mt-8 sm:mt-0">
+                <div class="relative w-64 h-64 sm:w-80 sm:h-80 md:w-96 md:h-96 floating-circle">
+                    <div
+                        class="absolute inset-0 rounded-full bg-gradient-to-br from-electric-blue/30 to-electric-purple/30 blur-2xl opacity-60">
+                    </div>
+                    <div
+                        class="floating relative w-full h-full rounded-full border-2 border-electric-blue/30 flex items-center justify-center overflow-hidden">
+                        <div class="absolute inset-0 opacity-20"
+                            style="background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCI+CjxyZWN0IHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgZmlsbD0iIzBBMEExQSI+PC9yZWN0Pgo8Y2lyY2xlIGN4PSIxMCIgY3k9IjEwIiByPSIxIiBmaWxsPSIjMDBGNUVGIiBvcGFjaXR5PSIwLjMiPjwvY2lyY2xlPgo8Y2lyY2xlIGN4PSI1IiBjeT0iNSIgcj0iMSIgZmlsbD0iIzk3NDdGRiIgb3BhY2l0eT0iMC4zIj48L2NpcmNsZT4KPGNpcmNsZSBjeD0iMTUiIGN5PSI1IiByPSIxIiBmaWxsPSIjRkYwMEU1IiBvcGFjaXR5PSIwLjMiPjwvY2lyY2xlPgo8Y2lyY2xlIGN4PSI1IiBjeT0iMTUiIHI9IjEiIGZpbGw9IiMwMEY1RUYiIG9wYWNpdHk9IjAuMyI+PC9jaXJjbGU+CjxjaXJjbGUgY3g9IjE1IiBjeT0iMTUiIHI9IjEiIGZpbGw9IiM5NzQ3RkYiIG9wYWNpdHk9IjAuMyI+PC9jaXJjbGU+Cjwvc3ZnPg=='); background-size: 20px 20px;">
+                        </div>
+                        <div class="text-center p-8 sm:p-12">
+                            <div class="text-6xl sm:text-8xl font-bold font-space hero-text">TE</div>
+                            <div class="text-lg sm:text-xl mt-4 sm:mt-6 text-electric-light/80 font-medium">Developer
+                            </div>
+                        </div>
+                    </div>
+                    <div
+                        class="absolute -bottom-6 sm:-bottom-10 -left-6 sm:-left-10 w-20 sm:w-32 h-20 sm:h-32 rounded-full bg-electric-purple/30 blur-xl">
+                    </div>
+                    <div
+                        class="absolute -top-6 sm:-top-10 -right-6 sm:-right-10 w-16 sm:w-24 h-16 sm:h-24 rounded-full bg-electric-pink/30 blur-xl">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects -->
+    <section id="projects" class="container mx-auto px-4 sm:px-6 py-16 sm:py-24">
+        <h2 class="text-3xl sm:text-4xl font-bold mb-12 sm:mb-20 text-center">
+            <span class="hero-text">MY SHOWSTOPPING</span><br>
+            <span class="text-electric-light">PROJECTS</span>
+        </h2>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-10">
+            <!-- Hogwarts Project -->
+            <div class="project-card card p-6 sm:p-10 rounded-2xl relative overflow-hidden">
+                <div
+                    class="absolute -right-12 sm:-right-20 -top-12 sm:-top-20 w-40 sm:w-60 h-40 sm:h-60 rounded-full bg-electric-blue/10 blur-xl">
+                </div>
+                <h3 class="text-2xl sm:text-3xl font-bold mb-3 sm:mb-4 text-electric-blue">Hogwarts For Programming</h3>
+                <p class="text-base sm:text-lg text-electric-light/90 mb-4 sm:mb-6">A gamified PHP MVC web app inspired
+                    by Hogwarts with user
+                    roles, courses, quizzes, item shop, and leaderboard system.</p>
+                <div class="flex justify-between items-center">
+                    <span class="text-electric-purple font-medium text-sm sm:text-base">April 2025</span>
+                    <a href="https://github.com/Tahanyemad16/Hogwarts-for-programming" target="_blank"
+                        class="flex items-center group">
+                        <span
+                            class="mr-2 font-medium text-sm sm:text-base group-hover:text-electric-blue transition-colors duration-300">View
+                            Project</span>
+                        <svg xmlns="http://www.w3.org/2000/svg"
+                            class="h-4 w-4 sm:h-5 sm:w-5 group-hover:text-electric-blue transition-colors duration-300"
+                            fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                        </svg>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Contact Book -->
+            <div class="project-card card p-6 sm:p-10 rounded-2xl relative overflow-hidden">
+                <div
+                    class="absolute -right-12 sm:-right-20 -top-12 sm:-top-20 w-40 sm:w-60 h-40 sm:h-60 rounded-full bg-electric-purple/10 blur-xl">
+                </div>
+                <h3 class="text-2xl sm:text-3xl font-bold mb-3 sm:mb-4 text-electric-purple">Contact Book Manager</h3>
+                <p class="text-base sm:text-lg text-electric-light/90 mb-4 sm:mb-6">Simulates a contacts application
+                    with features to add,
+                    delete, and favorite contacts for quick access.</p>
+                <div class="flex justify-between items-center">
+                    <span class="text-electric-pink font-medium text-sm sm:text-base">November 2024</span>
+                    <a href="https://github.com/Tahanyemad16/Contact-Book-Manager" target="_blank"
+                        class="flex items-center group">
+                        <span
+                            class="mr-2 font-medium text-sm sm:text-base group-hover:text-electric-purple transition-colors duration-300">View
+                            Project</span>
+                        <svg xmlns="http://www.w3.org/2000/svg"
+                            class="h-4 w-4 sm:h-5 sm:w-5 group-hover:text-electric-purple transition-colors duration-300"
+                            fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                        </svg>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Quran Playlist -->
+            <div class="project-card card p-6 sm:p-10 rounded-2xl relative overflow-hidden">
+                <div
+                    class="absolute -right-12 sm:-right-20 -top-12 sm:-top-20 w-40 sm:w-60 h-40 sm:h-60 rounded-full bg-electric-pink/10 blur-xl">
+                </div>
+                <h3 class="text-2xl sm:text-3xl font-bold mb-3 sm:mb-4 text-electric-pink">Quran Playlist Manager</h3>
+                <p class="text-base sm:text-lg text-electric-light/90 mb-4 sm:mb-6">Create and manage playlists of
+                    Quranic recitations with
+                    audio playback using IrrKlang audio library.</p>
+                <div class="flex justify-between items-center">
+                    <span class="text-electric-blue font-medium text-sm sm:text-base">December 2024</span>
+                    <a href="https://github.com/Tahanyemad16/Quran-Playlist" target="_blank"
+                        class="flex items-center group">
+                        <span
+                            class="mr-2 font-medium text-sm sm:text-base group-hover:text-electric-pink transition-colors duration-300">View
+                            Project</span>
+                        <svg xmlns="http://www.w3.org/2000/svg"
+                            class="h-4 w-4 sm:h-5 sm:w-5 group-hover:text-electric-pink transition-colors duration-300"
+                            fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                        </svg>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Tic Tac Toe -->
+            <div class="project-card card p-6 sm:p-10 rounded-2xl relative overflow-hidden">
+                <div
+                    class="absolute -right-12 sm:-right-20 -top-12 sm:-top-20 w-40 sm:w-60 h-40 sm:h-60 rounded-full bg-gradient-to-br from-electric-blue/10 to-electric-pink/10 blur-xl">
+                </div>
+                <h3
+                    class="text-2xl sm:text-3xl font-bold mb-3 sm:mb-4 text-gradient bg-gradient-to-r from-electric-blue to-electric-purple bg-clip-text text-transparent">
+                    Tic-Tac-Toe Game</h3>
+                <p class="text-base sm:text-lg text-electric-light/90 mb-4 sm:mb-6">Console-based C++ implementation of
+                    the classic game with
+                    move validation and winner detection.</p>
+                <div class="flex justify-between items-center">
+                    <span
+                        class="text-gradient bg-gradient-to-r from-electric-purple to-electric-pink bg-clip-text text-transparent font-medium text-sm sm:text-base">August
+                        2024</span>
+                    <a href="https://github.com/Tahanyemad16/Tic-Tac-Toe-Game" target="_blank"
+                        class="flex items-center group">
+                        <span
+                            class="mr-2 font-medium text-sm sm:text-base group-hover:text-gradient group-hover:bg-gradient-to-r group-hover:from-electric-blue group-hover:to-electric-purple group-hover:bg-clip-text group-hover:text-transparent transition-colors duration-300">View
+                            Project</span>
+                        <svg xmlns="http://www.w3.org/2000/svg"
+                            class="h-4 w-4 sm:h-5 sm:w-5 group-hover:text-electric-blue transition-colors duration-300"
+                            fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience -->
+    <section id="experience" class="container mx-auto px-4 sm:px-6 py-16 sm:py-24">
+        <h2 class="text-3xl sm:text-4xl font-bold mb-12 sm:mb-20 text-center">
+            <span class="text-electric-light">MY</span>
+            <span class="hero-text">ELECTRIFYING</span><br>
+            <span class="text-electric-light">EXPERIENCE</span>
+        </h2>
+
+        <div class="max-w-4xl mx-auto">
+            <div class="space-y-6 sm:space-y-12">
+                <!-- IEEE -->
+                <div class="experience-card card p-6 sm:p-8 rounded-2xl relative overflow-hidden group">
+                    <div
+                        class="absolute -right-12 sm:-right-20 -top-12 sm:-top-20 w-40 sm:w-60 h-40 sm:h-60 rounded-full bg-electric-blue/10 blur-xl group-hover:bg-electric-purple/10 transition-all duration-500">
+                    </div>
+                    <div class="flex flex-col sm:flex-row gap-6 sm:gap-8">
+                        <div class="sm:w-1/4 flex justify-center sm:justify-start">
+                            <div
+                                class="w-16 h-16 sm:w-20 sm:h-20 rounded-xl bg-gradient-to-br from-electric-blue to-electric-purple flex items-center justify-center glow group-hover:from-electric-purple group-hover:to-electric-pink transition-all duration-500">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 sm:h-10 w-8 sm:w-10" fill="none"
+                                    viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z" />
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="sm:w-3/4">
+                            <h3 class="text-xl sm:text-2xl font-bold mb-2 text-electric-light">IEEE Student Activity
+                            </h3>
+                            <p class="text-base sm:text-lg text-electric-light/90 mb-3 sm:mb-4">Participated in
+                                organizing technical & non-technical
+                                events as part of the IEEE student branch.</p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="skill-pill px-2 py-1 sm:px-3 sm:py-1 rounded-full text-xs sm:text-sm">Event
+                                    Planning</span>
+                                <span
+                                    class="skill-pill px-2 py-1 sm:px-3 sm:py-1 rounded-full text-xs sm:text-sm">Technical
+                                    Workshops</span>
+                                <span class="skill-pill px-2 py-1 sm:px-3 sm:py-1 rounded-full text-xs sm:text-sm">Team
+                                    Leadership</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ZagEng -->
+                <div class="experience-card card p-6 sm:p-8 rounded-2xl relative overflow-hidden group">
+                    <div
+                        class="absolute -right-12 sm:-right-20 -top-12 sm:-top-20 w-40 sm:w-60 h-40 sm:h-60 rounded-full bg-electric-purple/10 blur-xl group-hover:bg-electric-pink/10 transition-all duration-500">
+                    </div>
+                    <div class="flex flex-col sm:flex-row gap-6 sm:gap-8">
+                        <div class="sm:w-1/4 flex justify-center sm:justify-start">
+                            <div
+                                class="w-16 h-16 sm:w-20 sm:h-20 rounded-xl bg-gradient-to-br from-electric-purple to-electric-pink flex items-center justify-center glow group-hover:from-electric-pink group-hover:to-electric-blue transition-all duration-500">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 sm:h-10 w-8 sm:w-10" fill="none"
+                                    viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="sm:w-3/4">
+                            <h3 class="text-xl sm:text-2xl font-bold mb-2 text-electric-light">ZagEng Student Activity
+                            </h3>
+                            <p class="text-base sm:text-lg text-electric-light/90 mb-3 sm:mb-4">Explored Flutter within
+                                a mobile app development
+                                track, gaining hands-on experience with the framework.</p>
+                            <div class="flex flex-wrap gap-2">
+                                <span
+                                    class="skill-pill px-2 py-1 sm:px-3 sm:py-1 rounded-full text-xs sm:text-sm">Flutter</span>
+                                <span
+                                    class="skill-pill px-2 py-1 sm:px-3 sm:py-1 rounded-full text-xs sm:text-sm">Mobile
+                                    Development</span>
+                                <span
+                                    class="skill-pill px-2 py-1 sm:px-3 sm:py-1 rounded-full text-xs sm:text-sm">UI/UX</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ICPC -->
+                <div class="experience-card card p-6 sm:p-8 rounded-2xl relative overflow-hidden group">
+                    <div
+                        class="absolute -right-12 sm:-right-20 -top-12 sm:-top-20 w-40 sm:w-60 h-40 sm:h-60 rounded-full bg-electric-pink/10 blur-xl group-hover:bg-electric-blue/10 transition-all duration-500">
+                    </div>
+                    <div class="flex flex-col sm:flex-row gap-6 sm:gap-8">
+                        <div class="sm:w-1/4 flex justify-center sm:justify-start">
+                            <div
+                                class="w-16 h-16 sm:w-20 sm:h-20 rounded-xl bg-gradient-to-br from-electric-pink to-electric-blue flex items-center justify-center glow group-hover:from-electric-blue group-hover:to-electric-purple transition-all duration-500">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 sm:h-10 w-8 sm:w-10" fill="none"
+                                    viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="sm:w-3/4">
+                            <h3 class="text-xl sm:text-2xl font-bold mb-2 text-electric-light">ICPC Problem Solving
+                                Trainee</h3>
+                            <p class="text-base sm:text-lg text-electric-light/90 mb-3 sm:mb-4">Completed Level 0 & 1
+                                training programs, learning
+                                competitive programming techniques and problem-solving strategies.</p>
+                            <div class="flex flex-wrap gap-2">
+                                <span
+                                    class="skill-pill px-2 py-1 sm:px-3 sm:py-1 rounded-full text-xs sm:text-sm">Algorithms</span>
+                                <span class="skill-pill px-2 py-1 sm:px-3 sm:py-1 rounded-full text-xs sm:text-sm">Data
+                                    Structures</span>
+                                <span
+                                    class="skill-pill px-2 py-1 sm:px-3 sm:py-1 rounded-full text-xs sm:text-sm">Optimization</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education -->
+    <section class="container mx-auto px-4 sm:px-6 py-16 sm:py-24">
+        <div class="max-w-4xl mx-auto card p-8 sm:p-12 rounded-2xl relative overflow-hidden education-section">
+            <div
+                class="absolute -right-20 sm:-right-40 -top-20 sm:-top-40 w-60 sm:w-80 h-60 sm:h-80 rounded-full bg-gradient-to-br from-electric-blue/10 to-electric-purple/10 blur-2xl">
+            </div>
+            <div class="flex flex-col md:flex-row gap-8 sm:gap-12 items-center">
+                <div class="md:w-1/3 flex justify-center education-icon">
+                    <div
+                        class="w-32 h-32 sm:w-40 sm:h-40 md:w-48 md:h-48 rounded-full bg-gradient-to-br from-electric-blue to-electric-purple flex items-center justify-center glow pulse">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-14 sm:h-16 md:h-20 w-14 sm:w-16 md:w-20"
+                            fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path
+                                d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+                        </svg>
+                    </div>
+                </div>
+                <div class="md:w-2/3">
+                    <h2 class="text-2xl sm:text-3xl font-bold mb-4 sm:mb-6 text-electric-light">
+                        <span class="hero-text">Academic</span> Journey
+                    </h2>
+                    <h3
+                        class="text-xl sm:text-2xl font-bold mb-2 text-gradient bg-gradient-to-r from-electric-blue to-electric-purple bg-clip-text text-transparent">
+                        Computers and Informatics, Zagazig University</h3>
+                    <p class="text-base sm:text-lg text-electric-light/90 mb-3 sm:mb-4">Computer Science | GPA: 3.82</p>
+                    <p class="text-sm sm:text-base text-electric-light/80">October 2023 – Present (Expected Graduation:
+                        May 2027)</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills -->
+    <section class="container mx-auto px-4 sm:px-6 py-8 sm:py-12">
+        <div class="max-w-4xl mx-auto">
+            <h2 class="text-2xl sm:text-3xl font-bold mb-8 sm:mb-12 text-center text-electric-light">
+                <span class="hero-text">Technical</span> Arsenal
+            </h2>
+
+            <div class="card p-6 sm:p-10 rounded-2xl">
+                <div class="flex flex-wrap justify-center gap-3 sm:gap-4">
+                    <span
+                        class="skill-pill px-4 py-2 sm:px-6 sm:py-3 rounded-full text-sm sm:text-lg font-medium bg-gradient-to-br from-electric-blue/20 to-electric-blue/30 border border-electric-blue/50">C++</span>
+                    <span
+                        class="skill-pill px-4 py-2 sm:px-6 sm:py-3 rounded-full text-sm sm:text-lg font-medium bg-gradient-to-br from-electric-purple/20 to-electric-purple/30 border border-electric-purple/50">OOP</span>
+                    <span
+                        class="skill-pill px-4 py-2 sm:px-6 sm:py-3 rounded-full text-sm sm:text-lg font-medium bg-gradient-to-br from-electric-pink/20 to-electric-pink/30 border border-electric-pink/50">Data
+                        Structures</span>
+                    <span
+                        class="skill-pill px-4 py-2 sm:px-6 sm:py-3 rounded-full text-sm sm:text-lg font-medium bg-gradient-to-br from-electric-blue/20 to-electric-purple/30 border border-electric-blue/50">SQL</span>
+                    <span
+                        class="skill-pill px-4 py-2 sm:px-6 sm:py-3 rounded-full text-sm sm:text-lg font-medium bg-gradient-to-br from-electric-purple/20 to-electric-pink/30 border border-electric-purple/50">Dart</span>
+                    <span
+                        class="skill-pill px-4 py-2 sm:px-6 sm:py-3 rounded-full text-sm sm:text-lg font-medium bg-gradient-to-br from-electric-pink/20 to-electric-blue/30 border border-electric-pink/50">HTML/CSS</span>
+                    <span
+                        class="skill-pill px-4 py-2 sm:px-6 sm:py-3 rounded-full text-sm sm:text-lg font-medium bg-gradient-to-br from-electric-blue/20 to-electric-pink/30 border border-electric-blue/50">PHP</span>
+                    <span
+                        class="skill-pill px-4 py-2 sm:px-6 sm:py-3 rounded-full text-sm sm:text-lg font-medium bg-gradient-to-br from-electric-purple/20 to-electric-blue/30 border border-electric-purple/50">MySQL</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" class="container mx-auto px-4 sm:px-6 py-16 sm:py-24">
+        <h2 class="text-3xl sm:text-4xl font-bold mb-12 sm:mb-20 text-center">
+            <span class="text-electric-light">LET'S</span>
+            <span class="hero-text">CREATE</span><br>
+            <span class="text-electric-light">TOGETHER</span>
+        </h2>
+
+        <div class="max-w-2xl mx-auto card p-8 sm:p-12 rounded-2xl relative overflow-hidden">
+            <div
+                class="absolute -right-20 sm:-right-40 -top-20 sm:-top-40 w-60 sm:w-80 h-60 sm:h-80 rounded-full bg-gradient-to-br from-electric-blue/10 to-electric-pink/10 blur-2xl">
+            </div>
+            <div class="text-center">
+                <h3 class="text-xl sm:text-2xl font-bold mb-4 sm:mb-6 text-electric-light">Get In Touch</h3>
+                <p class="text-base sm:text-lg text-electric-light/90 mb-8 sm:mb-10">I'm currently available for
+                    freelance work,
+                    collaborations, or just a friendly chat about tech and innovation.</p>
+
+                <div class="flex flex-col sm:flex-row justify-center gap-4 sm:gap-6 mb-8 sm:mb-12 contact-buttons">
+                    <a href="mailto:tahanyemad30@gmail.com" class="relative overflow-hidden group">
+                        <div
+                            class="absolute inset-0 bg-gradient-to-r from-electric-blue to-electric-purple opacity-80 group-hover:from-electric-purple group-hover:to-electric-pink transition-all duration-500 rounded-xl">
+                        </div>
+                        <div
+                            class="relative px-6 py-3 sm:px-8 sm:py-4 rounded-xl font-bold group-hover:bg-opacity-0 transition-all duration-500 text-sm sm:text-base">
+                            tahanyemad30@gmail.com
+                        </div>
+                    </a>
+                    <a href="tel:01229659549" class="relative overflow-hidden group">
+                        <div
+                            class="absolute inset-0 border-2 border-electric-pink rounded-xl group-hover:bg-electric-pink/10 transition-all duration-500">
+                        </div>
+                        <div
+                            class="relative px-6 py-3 sm:px-8 sm:py-4 rounded-xl font-bold text-electric-pink group-hover:text-white transition-all duration-500 text-sm sm:text-base">
+                            01229659549
+                        </div>
+                    </a>
+                </div>
+
+                <div class="flex justify-center space-x-6 sm:space-x-8">
+                    <a href="https://github.com/Tahanyemad16" target="_blank"
+                        class="text-electric-light/70 hover:text-electric-blue transition-colors duration-300">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 sm:h-8 sm:w-8" fill="currentColor"
+                            viewBox="0 0 24 24">
+                            <path
+                                d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+                        </svg>
+                    </a>
+                    <a href="https://www.linkedin.com/in/tahany-emad-1637072b0" target="_blank"
+                        class="text-electric-light/70 hover:text-electric-blue transition-colors duration-300">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 sm:h-8 sm:w-8" fill="currentColor"
+                            viewBox="0 0 24 24">
+                            <path
+                                d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-gradient-to-r from-electric-dark to-electric-blue/10 py-8 sm:py-12">
+        <div class="container mx-auto px-4 sm:px-6 text-center">
+            <p class="text-sm sm:text-base text-electric-light/70">© 2023 Tahany Emad Mohammed. All rights reserved.</p>
+           
+        </div>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script>
+        // Initialize particles.js
+        document.addEventListener('DOMContentLoaded', function () {
+            particlesJS('particles-js', {
+                "particles": {
+                    "number": {
+                        "value": 80,
+                        "density": {
+                            "enable": true,
+                            "value_area": 800
+                        }
+                    },
+                    "color": {
+                        "value": ["#00F5FF", "#9747FF", "#FF00E5"]
+                    },
+                    "shape": {
+                        "type": "circle",
+                        "stroke": {
+                            "width": 0,
+                            "color": "#000000"
+                        },
+                        "polygon": {
+                            "nb_sides": 5
+                        }
+                    },
+                    "opacity": {
+                        "value": 0.5,
+                        "random": true,
+                        "anim": {
+                            "enable": true,
+                            "speed": 1,
+                            "opacity_min": 0.1,
+                            "sync": false
+                        }
+                    },
+                    "size": {
+                        "value": 3,
+                        "random": true,
+                        "anim": {
+                            "enable": true,
+                            "speed": 2,
+                            "size_min": 0.1,
+                            "sync": false
+                        }
+                    },
+                    "line_linked": {
+                        "enable": true,
+                        "distance": 150,
+                        "color": "#9747FF",
+                        "opacity": 0.2,
+                        "width": 1
+                    },
+                    "move": {
+                        "enable": true,
+                        "speed": 1,
+                        "direction": "none",
+                        "random": true,
+                        "straight": false,
+                        "out_mode": "out",
+                        "bounce": false,
+                        "attract": {
+                            "enable": true,
+                            "rotateX": 600,
+                            "rotateY": 1200
+                        }
+                    }
+                },
+                "interactivity": {
+                    "detect_on": "canvas",
+                    "events": {
+                        "onhover": {
+                            "enable": true,
+                            "mode": "grab"
+                        },
+                        "onclick": {
+                            "enable": true,
+                            "mode": "push"
+                        },
+                        "resize": true
+                    },
+                    "modes": {
+                        "grab": {
+                            "distance": 140,
+                            "line_linked": {
+                                "opacity": 0.5
+                            }
+                        },
+                        "bubble": {
+                            "distance": 400,
+                            "size": 40,
+                            "duration": 2,
+                            "opacity": 8,
+                            "speed": 3
+                        },
+                        "repulse": {
+                            "distance": 200,
+                            "duration": 0.4
+                        },
+                        "push": {
+                            "particles_nb": 4
+                        },
+                        "remove": {
+                            "particles_nb": 2
+                        }
+                    }
+                },
+                "retina_detect": true
+            });
+
+            // GSAP Animations
+            gsap.registerPlugin(ScrollTrigger);
+
+            // Fixed animation for sections
+            gsap.utils.toArray("section").forEach(section => {
+                gsap.from(section, {
+                    scrollTrigger: {
+                        trigger: section,
+                        start: "top bottom",
+                        toggleActions: "play none none none"
+                    },
+                    opacity: 0,
+                    y: 50,
+                    duration: 1,
+                    ease: "power2.out",
+                    immediateRender: false
+                });
+            });
+
+            // Mobile menu functionality
+            const openMenuBtn = document.getElementById('openMenu');
+            const closeMenuBtn = document.getElementById('closeMenu');
+            const mobileMenu = document.getElementById('mobileMenu');
+            const menuOverlay = document.getElementById('menuOverlay');
+
+            openMenuBtn.addEventListener('click', () => {
+                mobileMenu.classList.add('open');
+                menuOverlay.classList.add('open');
+                document.body.style.overflow = 'hidden';
+            });
+
+            closeMenuBtn.addEventListener('click', () => {
+                mobileMenu.classList.remove('open');
+                menuOverlay.classList.remove('open');
+                document.body.style.overflow = '';
+            });
+
+            menuOverlay.addEventListener('click', () => {
+                mobileMenu.classList.remove('open');
+                menuOverlay.classList.remove('open');
+                document.body.style.overflow = '';
+            });
+
+            // Close menu when clicking on links
+            document.querySelectorAll('#mobileMenu a').forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.remove('open');
+                    menuOverlay.classList.remove('open');
+                    document.body.style.overflow = '';
+                });
+            });
+        });
+    </script>
+
+</body>
+
+</html>
